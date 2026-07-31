@@ -284,3 +284,46 @@ if(menuToggle){
         mobileNav.classList.toggle("show");
     });
 }
+
+/* CATEGORY FILTER FROM URL */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const selectedCategory = params.get("category");
+
+    if (!selectedCategory) return;
+
+    const buttons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".product-card");
+
+    buttons.forEach(btn => {
+
+        btn.classList.remove("active");
+
+        if(btn.textContent.trim() === selectedCategory){
+            btn.classList.add("active");
+        }
+
+    });
+
+    cards.forEach(card => {
+
+        const category = card.querySelector(
+            ".product-category"
+        ).textContent.trim();
+
+        if(category === selectedCategory){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+});
